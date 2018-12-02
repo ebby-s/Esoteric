@@ -1,7 +1,7 @@
 global memory, pointer, in_memory, in_pointer
 memory = [0]
 pointer = 0
-in_memory = [chr(0),chr(6)]
+in_memory = [chr(13),chr(6)]
 in_pointer = 0
 program = open("program.txt").read().replace("\n","")
 
@@ -49,7 +49,7 @@ def run_loop(program,pos):    # Executes loop
         loop += char
         char = program[pos]
         pos += 1
-    while memory[pointer] > 0:
+    while memory[pointer] != 0:
         execute(loop)
 
 def take_input():
