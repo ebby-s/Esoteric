@@ -1,24 +1,32 @@
 global memory, pointer, in_memory, in_pointer
 memory = [0]
 pointer = 0
-in_memory = [chr(6),chr(12)]
+in_memory = [chr(0),chr(6)]
 in_pointer = 0
 program = open("program.txt").read().replace("\n","")
 
 def execute(program):        # Executes program
     #print(program)
     global memory, pointer, in_memory, in_pointer
+    balance = 0
+    loop = False
     for i,char in enumerate(program):
-        print(memory,char)
-        if char == ">": move_pointer(1)
-        elif char == "<": move_pointer(-1)
-        elif char == "+": memory[pointer] += 1
-        elif char == "-" and memory[pointer] > 0: memory[pointer] -= 1
-        elif char == "[": run_loop(program,i)
-        elif char == "]": """ends loop"""
-        elif char == ",": take_input()
-        elif char == ".": print(chr(memory[pointer]))
-        elif char == "!": print(memory,pointer)
+        #print(memory,char)
+        if char == ">" and not loop: move_pointer(1)
+        elif char == "<" and not loop: move_pointer(-1)
+        elif char == "+" and not loop: memory[pointer] += 1
+        elif char == "-" and not loop and memory[pointer] > 0: memory[pointer] -= 1
+        elif char == "[":
+            if not loop:
+                run_loop(program,i)
+                loop = True
+            balance += 1
+        elif char == "]":
+            balance -= 1
+            if balance == 0: loop = False
+        elif char == "," and not loop: take_input()
+        elif char == "." and not loop: print(chr(memory[pointer]))
+        elif char == "!" and not loop: print(memory,pointer)
 
 def move_pointer(direction):   # Moves pointer to left or right
     global memory, pointer, in_memory, in_pointer
@@ -41,8 +49,7 @@ def run_loop(program,pos):    # Executes loop
         loop += char
         char = program[pos]
         pos += 1
-    print(memory[pointer])
-    while memory[pointer] > 1:
+    while memory[pointer] > 0:
         execute(loop)
 
 def take_input():
