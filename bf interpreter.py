@@ -33,6 +33,7 @@ def move_pointer(direction):   # Moves pointer to left or right
     pointer += direction
     while pointer < 0:
         memory.insert(0,0)
+        pointer += 1
     while pointer > len(memory)-1:
         memory.append(0)
 
