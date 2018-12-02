@@ -1,12 +1,12 @@
 global memory, pointer, in_memory, in_pointer
 memory = [0]
 pointer = 0
-in_memory = ["",""]
+in_memory = [chr(6),chr(12)]
 in_pointer = 0
 program = open("program.txt").read().replace("\n","")
 
 def execute(program):        # Executes program
-    print(program)
+    #print(program)
     global memory, pointer, in_memory, in_pointer
     for i,char in enumerate(program):
         print(memory,char)
@@ -18,7 +18,7 @@ def execute(program):        # Executes program
         elif char == "]": """ends loop"""
         elif char == ",": take_input()
         elif char == ".": print(chr(memory[pointer]))
-        else: print(memory,pointer)
+        elif char == "!": print(memory,pointer)
 
 def move_pointer(direction):   # Moves pointer to left or right
     global memory, pointer, in_memory, in_pointer
@@ -35,12 +35,13 @@ def run_loop(program,pos):    # Executes loop
     char = ""
     balance = 0
     while char != "]" or balance != 0:
-        print(program,pos)
+        #print(program,pos)
         if char == "[": balance += 1
         elif char == "]": balance -= 1
         loop += char
         char = program[pos]
         pos += 1
+    print(memory[pointer])
     while memory[pointer] > 1:
         execute(loop)
 
