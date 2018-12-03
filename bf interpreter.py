@@ -1,7 +1,7 @@
 global memory, pointer, in_memory, in_pointer
 memory = [0]
 pointer = 0
-in_memory = [chr(18),chr(6)]
+in_memory = [chr(54),chr(6)]
 in_pointer = 0
 program = open("program.txt").read().replace("\n","")
 
@@ -11,7 +11,7 @@ def execute(program):        # Executes program
     balance = 0
     loop = False
     for i,char in enumerate(program):
-        #print(memory,char)
+        print(memory,char)
         if char == ">" and not loop: move_pointer(1)
         elif char == "<" and not loop: move_pointer(-1)
         elif char == "+" and not loop: memory[pointer] += 1
