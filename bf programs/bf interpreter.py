@@ -3,7 +3,7 @@ memory = [0]
 pointer = 0
 in_memory = [chr(3),chr(4)]
 in_pointer = 0
-program = open("addition.txt").read().replace("\n","")
+program = open("if not 0.txt").read().replace("\n","")
 
 def execute(program):        # Executes program
     #print(program)
@@ -11,7 +11,7 @@ def execute(program):        # Executes program
     balance = 0
     loop = False
     for i,char in enumerate(program):
-        print(memory,char)
+        #print(memory,char)
         if char == ">" and not loop: move_pointer(1)
         elif char == "<" and not loop: move_pointer(-1)
         elif char == "+" and not loop: memory[pointer] += 1
