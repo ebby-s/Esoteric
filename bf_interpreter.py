@@ -9,7 +9,7 @@ def execute(program):        # Executes program
     balance = 0
     loop = False
     for i,char in enumerate(program):
-        #print(memory,char)
+        print(memory,char)
         if char == ">" and not loop: move_pointer(1)
         elif char == "<" and not loop: move_pointer(-1)
         elif char == "+" and not loop: memory[pointer] += 1
@@ -23,7 +23,7 @@ def execute(program):        # Executes program
             balance -= 1
             if balance == 0: loop = False
         elif char == "," and not loop: take_input()
-        elif char == "." and not loop: print(chr(memory[pointer]))
+        elif char == "." and not loop: print(memory[pointer])
         elif char == "!" and not loop: print(memory,pointer)
 
 def move_pointer(direction):   # Moves pointer to left or right
@@ -59,6 +59,6 @@ def take_input():
     except: memory[pointer] = 0
 
 if __name__ == "__main__":
-    in_memory = [chr(3),chr(4)]
-    program = open("happy birthday.bf").read().replace("\n","")
+    in_memory = [chr(3),chr(2)]
+    program = open("exponents.txt").read().replace("\n","")
     execute(program)
